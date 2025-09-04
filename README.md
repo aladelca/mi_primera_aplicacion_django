@@ -1,8 +1,15 @@
-# Mi Primera Aplicación Django 🚀
+# Reviews App - Mi Primera Aplicación Django 🚀
 
 ## Descripción del Proyecto
 
-Esta es una aplicación web inicial desarrollada con Django como parte del curso **Python for Artificial Intelligence** en **CIBERTEC - Perú**. El proyecto está diseñado para introducir a los estudiantes en el desarrollo web con Django, sentando las bases para futuras implementaciones de inteligencia artificial.
+Esta es una aplicación web de **gestión de reseñas** desarrollada con Django como parte del curso **Python for Artificial Intelligence** en **CIBERTEC - Perú**. La aplicación permite a los usuarios crear, visualizar y gestionar reseñas de manera intuitiva, con un diseño moderno y minimalista que utiliza negro como color principal.
+
+### 🌟 Características Principales
+- **Crear reseñas**: Los usuarios pueden escribir y guardar sus opiniones
+- **Visualizar reseñas**: Lista elegante de todas las reseñas con diseño tipo tarjeta
+- **Diseño responsivo**: Optimizado para dispositivos móviles y escritorio
+- **Interfaz moderna**: Tema negro con gradientes y efectos visuales atractivos
+- **Navegación intuitiva**: Enlaces claros entre las diferentes secciones
 
 ## 📚 Curso: Python for Artificial Intelligence
 **Institución:** CIBERTEC - Perú  
@@ -18,11 +25,12 @@ Esta es una aplicación web inicial desarrollada con Django como parte del curso
 
 ## 🛠️ Tecnologías Utilizadas
 
-- **Python 3.8+**
+- **Python 3.9+**
 - **Django 4.2+**
 - **SQLite** (Base de datos por defecto)
-- **HTML5/CSS3**
-- **Bootstrap** (para estilos responsivos)
+- **HTML5/CSS3** (Diseño personalizado)
+- **CSS Grid & Flexbox** (Layout responsivo)
+- **Gradientes CSS** (Efectos visuales modernos)
 
 ## 📋 Requisitos Previos
 
@@ -40,7 +48,7 @@ pip --version
 
 ### 1. Clonar el repositorio
 ```bash
-git clone https://github.com/tu-usuario/mi_primera_aplicacion_django.git
+git clone https://github.com/aladelca/mi_primera_aplicacion_django.git
 cd mi_primera_aplicacion_django
 ```
 
@@ -64,6 +72,9 @@ pip install -r requirements.txt  # (cuando esté disponible)
 
 ### 4. Configurar la aplicación
 ```bash
+# Navegar al directorio del proyecto Django
+cd lab1
+
 # Realizar migraciones
 python manage.py makemigrations
 python manage.py migrate
@@ -82,41 +93,55 @@ Abre tu navegador y visita: `http://127.0.0.1:8000/`
 
 ```
 mi_primera_aplicacion_django/
-├── manage.py
-├── requirements.txt
-├── mi_proyecto/
-│   ├── __init__.py
-│   ├── settings.py
-│   ├── urls.py
-│   ├── wsgi.py
-│   └── asgi.py
-├── mi_app/
-│   ├── __init__.py
-│   ├── admin.py
-│   ├── apps.py
-│   ├── models.py
-│   ├── tests.py
-│   ├── views.py
-│   ├── urls.py
-│   └── migrations/
-├── templates/
-│   └── base.html
-├── static/
-│   ├── css/
-│   ├── js/
-│   └── img/
-└── README.md
+├── README.md
+├── LICENSE
+├── lab1/                          # Proyecto Django principal
+│   ├── manage.py
+│   ├── db.sqlite3                 # Base de datos SQLite
+│   ├── lab1/                      # Configuración del proyecto
+│   │   ├── __init__.py
+│   │   ├── settings.py
+│   │   ├── urls.py
+│   │   ├── wsgi.py
+│   │   └── asgi.py
+│   └── reviews/                   # Aplicación de reseñas
+│       ├── __init__.py
+│       ├── admin.py               # Configuración del admin
+│       ├── apps.py
+│       ├── models.py              # Modelo Review
+│       ├── views.py               # Vistas de la aplicación
+│       ├── urls.py                # URLs de la app
+│       ├── forms.py               # Formularios Django
+│       ├── tests.py
+│       ├── migrations/            # Migraciones de BD
+│       └── templates/             # Templates HTML
+│           ├── index.html         # Página de inicio
+│           ├── add_review.html    # Formulario nueva reseña
+│           └── list_review.html   # Lista de reseñas
 ```
 
 ## 🔧 Funcionalidades Implementadas
 
-- ✅ Configuración inicial de Django
-- ✅ Página de inicio con template base
-- ✅ Sistema de URLs configurado
-- ✅ Modelo de datos básico
-- ✅ Panel de administración
-- ✅ Vistas básicas (CBV y FBV)
-- ✅ Integración con Bootstrap
+### ✅ **Sistema de Reseñas Completo**
+- **Página de inicio**: Diseño elegante con navegación principal
+- **Crear reseñas**: Formulario intuitivo para agregar nuevas reseñas
+- **Listar reseñas**: Vista de todas las reseñas en formato de tarjetas
+- **Modelo de datos**: Estructura simple pero efectiva para almacenar reseñas
+
+### ✅ **Diseño y UX**
+- **Tema negro moderno**: Gradientes y efectos visuales atractivos
+- **Diseño responsivo**: Optimizado para móviles, tablets y escritorio
+- **Navegación intuitiva**: Enlaces claros entre secciones
+- **Efectos interactivos**: Hover states y transiciones suaves
+- **Tipografía moderna**: Uso de la fuente Inter para mejor legibilidad
+
+### ✅ **Desarrollo Django**
+- **Configuración inicial** de Django correctamente implementada
+- **Modelo Review** con campo de texto para reseñas
+- **Formularios Django** para manejo de datos
+- **Sistema de URLs** configurado con nombres descriptivos
+- **Templates con diseño personalizado** sin dependencias externas
+- **Vistas basadas en funciones** (FBV) bien estructuradas
 
 ## 📖 Conceptos Clave Aprendidos
 
@@ -135,14 +160,44 @@ mi_primera_aplicacion_django/
 - Parámetros en URLs
 - Namespaces y names
 
-### 4. Templates
-- Sistema de herencia de templates
-- Context processors
-- Template tags y filters
+### 4. Templates y Diseño Responsivo
+- Sistema de templates personalizados sin frameworks externos
+- CSS moderno con gradientes y efectos visuales
+- Media queries para diferentes dispositivos
+- Diseño mobile-first
+
+### 5. Gestión de Formularios
+- Formularios Django integrados
+- Validación automática de datos
+- Manejo de errores y redirecciones
+
+## 🎨 Características del Diseño
+
+### **Tema Visual**
+- **Paleta de colores**: Negro como color principal con gradientes (`#1a1a1a` a `#2d2d2d`)
+- **Tipografía**: Inter font para mejor legibilidad y modernidad
+- **Efectos visuales**: Sombras, hover states y transiciones suaves
+
+### **Responsividad**
+- **Mobile-first**: Diseño optimizado primero para móviles
+- **Breakpoints**: 
+  - Móvil: ≤ 480px
+  - Tablet: 481px - 768px  
+  - Escritorio: > 768px
+- **Elementos adaptativos**: Botones, tipografía y espaciado que se ajustan automáticamente
+
+### **Experiencia de Usuario**
+- **Navegación intuitiva**: Enlaces claros y bien organizados
+- **Estados interactivos**: Efectos hover en botones y tarjetas
+- **Feedback visual**: Indicadores de focus en formularios
+- **Loading states**: Transiciones suaves entre páginas
 
 ## 🧪 Comandos Útiles
 
 ```bash
+# Navegar al directorio del proyecto
+cd lab1
+
 # Crear nueva aplicación
 python manage.py startapp nombre_app
 
@@ -155,22 +210,25 @@ python manage.py migrate
 # Ejecutar tests
 python manage.py test
 
-# Recopilar archivos estáticos
-python manage.py collectstatic
-
 # Shell interactivo de Django
 python manage.py shell
+
+# Acceder al panel de administración
+# Primero crear superusuario: python manage.py createsuperuser
+# Luego visitar: http://127.0.0.1:8000/admin/
 ```
 
 ## 🎓 Próximos Pasos
 
-Esta aplicación base será extendida en futuras clases para incluir:
+Esta aplicación de reseñas será extendida en futuras clases para incluir:
 
-1. **APIs REST** con Django REST Framework
-2. **Integración con modelos de ML** usando scikit-learn
-3. **Implementación de algoritmos de IA**
-4. **Visualización de datos** con Chart.js
-5. **Deploy en la nube** (Heroku/AWS)
+1. **Sistema de usuarios** y autenticación
+2. **APIs REST** para operaciones CRUD de reseñas
+3. **Análisis de sentimientos** de las reseñas usando NLP
+4. **Integración con modelos de ML** para clasificación de reseñas
+5. **Dashboard de analytics** con visualización de datos
+6. **Sistema de puntuación** y ratings
+7. **Deploy en la nube** (Heroku/AWS/Docker)
 
 ## 📚 Recursos de Estudio
 
@@ -190,7 +248,9 @@ Este proyecto es parte del material educativo de CIBERTEC. Los estudiantes puede
 
 ## 👨‍🏫 Instructor
 
-**Profesor:** Carlos Adrian Alarcon 
+**Profesor:** Carlos Adrian Alarcon Delgado
+**Institución:** CIBERTEC - Perú  
+**Curso:** Python for Artificial Intelligence
 
 **LinkedIn:** [Ver mi perfil](https://www.linkedin.com/in/carlos-adrian-alarcon-delgado/)
 

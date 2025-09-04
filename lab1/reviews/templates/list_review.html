@@ -1,21 +1,240 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
+<html lang="es">
+<head>
     <meta charset="utf-8">
-    <title>List Reviews</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-  </head>
-  <body>
-    <table border=1 width=30%>
-      <th>ID</th>
-      <th>REVIEW</th>
-      {% for r in reviews %}
-      <tr>
-        <td>{{r.id}}</td>
-        <td>{{r.review}}</td>
-      </tr>
-      {% endfor %}
-    </table>
-    <p><a href="{% url 'index' %}">HOME</a></p>
-  </body>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lista de Reseñas - Reviews App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #1a1a1a;
+            min-height: 100vh;
+            padding: 1rem;
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 0.5rem;
+            }
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 0.5rem;
+            }
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        h1 {
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.75rem;
+            }
+        }
+        
+        .subtitle {
+            color: #cccccc;
+            font-size: 1.1rem;
+        }
+        
+        @media (max-width: 480px) {
+            .subtitle {
+                font-size: 1rem;
+            }
+        }
+        
+        .reviews-grid {
+            display: grid;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .review-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        
+        .review-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+        
+        .review-id {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+            font-size: 0.875rem;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        
+        .review-text {
+            color: #4a5568;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin: 0;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+        
+        .empty-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        
+        .empty-title {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .empty-text {
+            color: #cccccc;
+            margin-bottom: 2rem;
+        }
+        
+        @media (max-width: 480px) {
+            .empty-title {
+                font-size: 1.25rem;
+            }
+            
+            .empty-text {
+                font-size: 0.9rem;
+            }
+        }
+        
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+        }
+        
+        .btn-outline {
+            background: white;
+            color: #1a1a1a;
+            border: 2px solid #1a1a1a;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+        }
+        
+        .btn-outline:hover {
+            background: #1a1a1a;
+            color: white;
+        }
+        
+        @media (max-width: 480px) {
+            .btn {
+                padding: 0.875rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        .actions {
+            text-align: center;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        @media (max-width: 600px) {
+            .actions {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.75rem;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Todas las Reseñas</h1>
+            <p class="subtitle">Descubre lo que otros han compartido</p>
+        </div>
+        
+        {% if reviews %}
+            <div class="reviews-grid">
+                {% for r in reviews %}
+                <div class="review-card">
+                    <span class="review-id">Reseña #{{ r.id }}</span>
+                    <p class="review-text">{{ r.review }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="empty-state">
+                <div class="empty-icon">📝</div>
+                <h2 class="empty-title">No hay reseñas aún</h2>
+                <p class="empty-text">¡Sé el primero en compartir tu opinión!</p>
+            </div>
+        {% endif %}
+        
+        <div class="actions">
+            <a href="{% url 'add_review' %}" class="btn btn-primary">Nueva Reseña</a>
+            <a href="{% url 'index' %}" class="btn btn-outline">Volver al Inicio</a>
+        </div>
+    </div>
+</body>
 </html>
